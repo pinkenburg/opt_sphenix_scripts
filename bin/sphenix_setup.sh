@@ -1,5 +1,6 @@
 #! /bin/bash
-
+# for debugging uncomment set -x:
+# set -x
 # tell our perl scripts which adjust the opt areas
 # according to the cvmfs volume name
 # the next line is used by the cvmfs distributions scripts - NEVER CHANGE IT
@@ -14,10 +15,10 @@
 # -n forces the unset of all relevant variables so you can switch from a
 # previously initialized setup (different build or PHENIX).
 # For instance, "new" (also the default value) will point you to
-# software in /cvmfs/sphenix.sdcc.bnl.gov/gcc-8.3/release/release_new/new
+# software in /cvmfs/sphenix.sdcc.bnl.gov/alma9.2-gcc-14.2.0/release/release_new/new
 # You can be specific if you need to be:
-# Specifying "ana.230" will point you to software in
-# /cvmfs/sphenix.sdcc.bnl.gov/gcc-8.3/release/release_ana/ana.230
+# Specifying "ana.516" will point you to software in
+# /cvmfs/sphenix.sdcc.bnl.gov/alma9.2-gcc-14.2.0/release/release_ana/ana.516
 # -h just prints help (as does any other -<letter> flag)
 
 # Usage: source sphenix_setup.sh [-a] [-n] [-h] [version]
@@ -423,11 +424,6 @@ done
 
 
 
-# finally prepend . to path/ldpath
-
-path=.:$path
-ldpath=.:$ldpath
-
 #set paths
 PATH=${path}
 LD_LIBRARY_PATH=${ldpath}
@@ -463,7 +459,7 @@ unset manpath
 export PATH
 export LD_LIBRARY_PATH
 export MANPATH
-source $OPT_SPHENIX/bin/setup_root6_include_path.sh $OFFLINE_MAIN
+source ${OPT_SPHENIX}/bin/setup_root6_include_path.sh $OFFLINE_MAIN
 
 if [[ -f ${OPT_SPHENIX}/gcc/14.2.0-2f0a0/x86_64-el9/setup.sh ]]
 then
