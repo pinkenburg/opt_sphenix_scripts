@@ -287,15 +287,6 @@ do
   fi
 done
 
-
-
-
-
-# finally prepend . to path/ldpath
-
-path=.:$path
-ldpath=.:$ldpath
-
 #set paths
 PATH=${path}
 LD_LIBRARY_PATH=${ldpath}

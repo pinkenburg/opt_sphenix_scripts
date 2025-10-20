@@ -223,11 +223,6 @@ foreach mandir (${ONLINE_MAIN}/share/man \
   endif
 end
 
-# finally prepend . and the gcc8.3 utils bin for valgrind to path/ldpath
-
-#set path = (. $path)
-set ldpath=.:${ldpath}
-
 # Set some actual environment vars
 if ($opt_a) then
     setenv PATH ${ORIG_PATH}:${PATH}
