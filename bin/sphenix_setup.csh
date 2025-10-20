@@ -9,10 +9,10 @@
 # -n forces the unset of all relevant variables so you can switch from a
 # previously initialized setup (different build or PHENIX).
 # For instance, "new" (also the default value) will point you to
-# software in /cvmfs/sphenix.sdcc.bnl.gov/gcc-8.3/release/release_new/new
+# software in /cvmfs/sphenix.sdcc.bnl.gov/alma9.2-gcc-14.2.0/release/release_new/new
 # You can be specific if you need to be:
-# Specifying "ana.230" will point you to software in
-# /cvmfs/sphenix.sdcc.bnl.gov/gcc-8.3/release/release_ana/ana.230
+# Specifying "ana.516" will point you to software in
+# /cvmfs/sphenix.sdcc.bnl.gov/alma9.2-gcc-14.2.0/release/release_ana/ana.516
 # -h just prints help (as does any other -<letter> flag)
 
 # Usage: source phenix_setup.csh [-a] [-n] [-h] [version]
@@ -351,11 +351,6 @@ foreach mandir (${ROOTSYS}/man \
     set manpath = ${mandir}:${manpath}
   endif
 end
-
-# finally prepend . to path/ldpath
-
-set path = (. $path)
-set ldpath=.:${ldpath}
 
 # Set some actual environment vars
 if ($opt_a) then
