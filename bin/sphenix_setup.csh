@@ -387,11 +387,6 @@ foreach mandir (${ROOTSYS}/man \
   endif
 end
 
-# finally prepend . to path/ldpath
-
-set path = (. $path)
-set ldpath=.:${ldpath}
-
 # Set some actual environment vars
 if ($opt_a) then
     setenv PATH ${ORIG_PATH}:${PATH}
