@@ -112,7 +112,10 @@ endif
 setenv NO_AT_BRIDGE 1
 
 # Make copies of PATH and LD_LIBRARY_PATH as they were
-setenv ORIG_PATH ${PATH}
+if ($?PATH) then
+  setenv ORIG_PATH ${PATH}
+endif
+
 if ($?LD_LIBRARY_PATH) then
     setenv ORIG_LD_LIBRARY_PATH ${LD_LIBRARY_PATH}
 else
@@ -141,7 +144,7 @@ endif
 
 # set site wide compiler options (no rpath hardcoding)
 if (! $?CONFIG_SITE) then
-  if ($opt_v =~ "debug*" ) then
+  if ($opt_v =~ "debug*" || $opt_v =~ "*insure*") then
     if (-f ${OPT_SPHENIX}/etc/config_debug.site) then
       setenv CONFIG_SITE ${OPT_SPHENIX}/etc/config_debug.site
     endif
@@ -295,8 +298,11 @@ endif
 
 # Set up Insure++, if we have it
 if (! $?PARASOFT) then
-#  setenv PARASOFT /sdcc/common/software/insure/insure-2024.1.0
-  setenv PARASOFT doesnotexist
+  if ($opt_v =~ "*insure*") then
+    setenv PARASOFT /sdcc/common/software/insure/insure-2025.1.0
+  else
+    setenv PARASOFT doesnotexist
+  endif
 endif
 
 # File catalog search path

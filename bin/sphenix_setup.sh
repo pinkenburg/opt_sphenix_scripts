@@ -130,7 +130,12 @@ fi
 export NO_AT_BRIDGE=1
 
 # store previous paths in case we want to prepend them (with -a)
-export ORIG_PATH=$PATH
+if [ ! -z "$PATH" ]
+then
+    export ORIG_PATH=$PATH
+else
+    unset ORIG_PATH
+fi
 
 if [ ! -z "$LD_LIBRARY_PATH" ] 
 then
@@ -182,11 +187,10 @@ then
     export OPT_UTILS=${optbasepath}/opt/sphenix/utils
   fi
 fi
-
 # set site wide compiler options (no rpath hardcoding)
 if [[ -z "$CONFIG_SITE" ]]
 then
-  if [[ $opt_v = "debug"* && -f ${OPT_SPHENIX}/etc/config_debug.site ]]
+  if [[ ($opt_v = "debug"* || $opt_v = *"insure"*) && -f ${OPT_SPHENIX}/etc/config_debug.site ]]
   then
     export CONFIG_SITE=${OPT_SPHENIX}/etc/config_debug.site
   else
@@ -354,8 +358,12 @@ fi
 # Set up Insure++, if we have it
 if [ -z  "$PARASOFT" ] 
 then
-#  export PARASOFT=/sdcc/common/software/insure/insure-2024.1.0
-  export PARASOFT=doesnotexist
+    if [[ $opt_v == *insure* ]]
+    then
+        export PARASOFT=/sdcc/common/software/insure/insure-2025.1.0
+    else
+	export PARASOFT=doesnotexist
+    fi
 fi
 
 # File catalog search path
