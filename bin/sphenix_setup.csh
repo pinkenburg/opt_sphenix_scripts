@@ -70,6 +70,7 @@ if ($opt_n) then
   unsetenv CVSROOT
   unsetenv G4*
   unsetenv GSEARCHPATH
+  unsetenv HEED_DATABASE
   unsetenv LHAPATH
   unsetenv LHAPDF_DATA_PATH
   unsetenv MANPATH
@@ -90,9 +91,6 @@ if ($opt_n) then
   unsetenv SIMULATION_MAIN
   unsetenv TSEARCHPATH
   unsetenv XERCESCROOT
-  unsetenv XPLOAD_CONFIG
-  unsetenv XPLOAD_CONFIG_DIR
-  unsetenv XPLOAD_DIR
 endif
 
 # set our postgres defaults
@@ -274,10 +272,6 @@ if (! $?XERCESCROOT) then
   setenv XERCESCROOT $G4_MAIN
 endif
 
-if (! $?XPLOAD_CONFIG_DIR) then
-  setenv XPLOAD_CONFIG_DIR ${OPT_SPHENIX}/etc
-endif
-
 if (! $?NOPAYLOADCLIENT_CONF) then
   setenv NOPAYLOADCLIENT_CONF ${OPT_SPHENIX}/etc/sPHENIX_newcdb.json
 endif
@@ -308,6 +302,11 @@ endif
 # File catalog search path
 if (! $?GSEARCHPATH) then
     setenv GSEARCHPATH .:PG:LUSTRE:RAWDATA
+endif
+
+#garfield
+if (! $?HEED_DATABASE) then
+    setenv HEED_DATABASE ${OFFLINE_MAIN}/share/Heed/database
 endif
 
 # set initial paths, all following get prepended

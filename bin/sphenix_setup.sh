@@ -86,6 +86,7 @@ if [ $opt_n != 0 ]
   unset CVSROOT
   unset ${!G4*}
   unset GSEARCHPATH
+  unset HEED_DATABASE
   unset LHAPATH
   unset LHAPDF_DATA_PATH
   unset NOPAYLOADCLIENT_CONF
@@ -105,9 +106,6 @@ if [ $opt_n != 0 ]
   unset SIMULATION_MAIN
   unset TSEARCHPATH
   unset XERCESCROOT
-  unset XPLOAD_CONFIG
-  unset XPLOAD_CONFIG_DIR
-  unset XPLOAD_DIR
 fi
 
 # set our postgres defaults
@@ -333,11 +331,6 @@ then
   export XERCESCROOT=${G4_MAIN}
 fi
 
-if [[ -z "$XPLOAD_CONFIG_DIR" ]]
-then
-  export XPLOAD_CONFIG_DIR=${OPT_SPHENIX}/etc
-fi
-
 if [[ -z "$NOPAYLOADCLIENT_CONF" ]]
 then
   export NOPAYLOADCLIENT_CONF=${OPT_SPHENIX}/etc/sPHENIX_newcdb.json
@@ -370,6 +363,12 @@ fi
 if [ -z "$GSEARCHPATH" ]
 then
   export GSEARCHPATH=.:PG:LUSTRE:RAWDATA
+fi
+
+#garfield
+if [ -z "$HEED_DATABASE" ]
+then
+  export HEED_DATABASE=${OFFLINE_MAIN}/share/Heed/database
 fi
 
 path=(/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin)
